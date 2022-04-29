@@ -2,38 +2,38 @@
 
 
 /*
-  Versionsnummern:
-  V1 - nur Taster, kein Display, nur LED-Anzeige
-  V2 - Taster, LEDs und Display mit wechselnder Anzeige, Messung nur bei gedrücktem Taster
-  V3 - Taster, WiFi (UDP) via ESP auf UART3, LEDs und Display wie bei V2
+  Number of versions:
+  V1 - only push button, no display, only LEDs
+  V2 - push button, LEDs and alternating display, measurement only when button is pushed
+  V3 - push button, WiFi (UDP) via ESP-01 module on UART1, LEDs and display as under version 2
  
 */
 
 
-/*Pinbelegung
+/*Pin assignment
 
-  Pins A0-A9: Elektroden Fuellstandsmesser
-  Pin 20: Taster (Interrupt) fuer manuelles Messen
-  Pins l8&19: UART 1 mit Interrupt für Kommunikation mit ESP-01
-  Pin 5: Relais
-  Pin 6: Ventil (via Solidstate-Relais)
-  Pin A10: KTY81-210 Temperatursensor
-  Pins 39-41: Display
+  Pins A0-A9: elektrodes level measurement
+  Pin 20: push button (interrupt) for manual measurement
+  Pins l8&19: UART 1 with interrupt for communication with ESP-01 module
+  Pin 5: Relay
+  Pin 6: Valve (via solid-state relay)
+  Pin A10: KTY81-210 temperature sensor
+  Pins 39-41: display
 
 
 */
 
-//Bibliotheken
+//libraries
 #include <Arduino.h>
 #include <SPI.h>
 #include <WiFiEsp.h>
 #include <WiFiEspUdp.h>
 
 
-int p = 0; // Zaehlvariabel
-int P = 0; // Pegel in Prozent
-int T;  // Temperatur
-int Offset = 5; // Korrektur KTY81-210
+int p = 0; // counting variable
+int P = 0; // level in percentage
+int T;  // temperature
+int Offset = 5; // offset KTY81-210
 
 //Variables and constants for Densitron LCD display
 
@@ -42,11 +42,11 @@ int DATA = 40;
 int WR = 41;
 
 // Pins fuer Relais
-#define RELAIS 5 // Pin 5 fuer Relais
-#define VENTIL 6 // Pin 6 fuer Relais fuer Ventil falls P <= 10%
+#define RELAIS 5 // Pin 5 for relay
+#define VENTIL 6 // Pin 6 for valve-relay if P <= 10%
 
-// Pin fuer Taster
-#define TASTER 20 // Pin 20 (Interrupt) fuer Taster
+// Pin for push button
+#define TASTER 20 // Pin 20 (Interrupt) for push button
 
 // Pins fuer Fuellstandshöhe - 10 Kanaele
 #define BRAUN_10 22 //Pin 22 fuer braunen Draht & 10% Fuellung
