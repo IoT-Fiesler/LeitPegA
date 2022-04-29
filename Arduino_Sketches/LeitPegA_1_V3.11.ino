@@ -304,8 +304,8 @@ void lcd_flush_buf(void) {
 }
 
 
-char ssid[] = "FRITZ!Box Fon WLAN 7170";            // your network SSID (name)
-char pass[] = "5916849882156628";        // your network password
+char ssid[] = "YOUR_SSID";            // your network SSID (name)
+char pass[] = "YOUR_PASS";        // your network password
 int status = WL_IDLE_STATUS;     // the Wifi radio's status
 
 IPAddress ip(192, 168, 178, 91);
