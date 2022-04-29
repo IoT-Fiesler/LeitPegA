@@ -48,20 +48,20 @@ int WR = 41;
 // Pin for push button
 #define TASTER 20 // Pin 20 (Interrupt) for push button
 
-// Pins fuer Fuellstandshöhe - 10 Kanaele
-#define BRAUN_10 22 //Pin 22 fuer braunen Draht & 10% Fuellung
-#define WEISS_BRAUN_20 23 //Pin 23 fuer weißen (bei braun) Draht und 20% Fuellung
-#define GELB_30 24 //Pin 24 fuer  gelben Draht & 30% Fuellung
-#define WEISS_GELB_40 25 // Pin 25 fuer weißen (bei gelb) Draht & 40% Fuellung
-#define SCHWARZ_50 26 // Pin 26 fuer schwarzen Draht & 50% Fuellung
-#define WEISS_SCHWARZ_60 27 // Pin 27 fuer weißen (bei schwarz) Draht & 60% Fuellung
-#define BLAU_ROT_70 28 // Pin 28 fuer blauen (bei rot) Draht & 70% Fuellung
-#define ROT_80 29 // Pin 29 fuer roten Draht & 80% Fuellung
-#define BLAU_WEISS_90 30 // Pin 30 fuer blauen (bei weiß) Draht & 90% Fuellung
-#define WEISS_100 31 // Pinv 31 fuer weißen Draht & 100% Fuellung
+// Pins for level measuring - 10 channels
+#define BRAUN_10 22 //Pin 22 for brown wire & 10% level
+#define WEISS_BRAUN_20 23 //Pin 23 for white (at brown) wire and 20% level
+#define GELB_30 24 //Pin 24 for  yellow wire & 30% level
+#define WEISS_GELB_40 25 // Pin 25 for white (at yellow) wire & 40% level
+#define SCHWARZ_50 26 // Pin 26 for black wire & 50% level
+#define WEISS_SCHWARZ_60 27 // Pin 27 for white (at black) wire & 60% level
+#define BLAU_ROT_70 28 // Pin 28 for blue (at red) wire & 70% level
+#define ROT_80 29 // Pin 29 for red wire & 80% level
+#define BLAU_WEISS_90 30 // Pin 30 for blue (at white) wire & 90% level
+#define WEISS_100 31 // Pinv 31 for white wire & 100% level
 
 
-//Pins 11-13 fuer SPI bzw. 50-52
+//Pins 11-13 for SPI or 50-52 respectively
 
 #define CS_low()   digitalWrite(CS, LOW); delayMicroseconds(1)
 #define CS_high()  delayMicroseconds(1); digitalWrite(CS, HIGH)
@@ -409,19 +409,19 @@ void loop () {
     evalSerialData(packetBuffer);
   }
 
-  else if (digitalRead(TASTER) == LOW) {  // Wenn auf der Tasters auf LOW gezogen wird ...
+  else if (digitalRead(TASTER) == LOW) {  // if push button is on LOW ...
 
     Fuellstand();
     /*
         digitalWrite(RELAIS, HIGH); // Setze Relaisausgang auf HIGH
 
-        p=0; // Rücksetzen des Pegelstandes zur Neumessung
+        p=0; // reset of level for new measurement
         P=0;
 
-        delay(2000); // Zeit, die der Kondensator zum Aufladen braucht, erst danach brauchbare Werte
+        delay(2000); // time for the capacitor to get fully charged
 
         for (int channel = 0; channel<=9; channel++){
-          if (analogRead(channel) > 100) { //Schwellwert 100, genau bei 0,7V etwa 140
+          if (analogRead(channel) > 100) { //benchmark at 100, precisely with 0,7V @ 140
 
           int a;
           a=analogRead(channel);
@@ -785,7 +785,7 @@ void loop () {
     }
   }
 }
-//Ende void loop ab jetzt Funktionen
+//end of void loop now functions
 
 /*
 void serialEvent()
